@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abravo <abravo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 23:16:49 by abravo            #+#    #+#             */
-/*   Updated: 2022/12/19 20:45:35 by abravo           ###   ########.fr       */
+/*   Created: 2022/06/01 17:34:17 by abravo            #+#    #+#             */
+/*   Updated: 2022/06/01 18:48:39 by abravo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "ft_printf.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <errno.h>
-# include <fcntl.h>
+int	ft_putnbr(int n)
+{
+	int	len;
 
-#endif
+	len = 0;
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return (11);
+	}
+	if (n < 0)
+	{
+		n = -n;
+		len += ft_putchar('-');
+	}
+	if (n > 9)
+		len += ft_putnbr(n / 10);
+	len += ft_putchar((n % 10) + '0');
+	return (len);
+}

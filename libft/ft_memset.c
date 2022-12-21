@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abravo <abravo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 23:16:49 by abravo            #+#    #+#             */
-/*   Updated: 2022/12/19 20:45:35 by abravo           ###   ########.fr       */
+/*   Created: 2022/05/06 17:14:54 by abravo            #+#    #+#             */
+/*   Updated: 2022/05/13 16:59:54 by abravo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <errno.h>
-# include <fcntl.h>
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = c;
+		i++;
+	}
+	return (s);
+}
+
+/*
+int main(void)
+{
+	char prenom[] = "Amanda";
+	ft_memset(prenom, 'A', 9);
+	printf("%s\n", prenom);
+	return (0);
+}*/

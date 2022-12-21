@@ -6,7 +6,7 @@
 /*   By: abravo <abravo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 23:13:19 by abravo            #+#    #+#             */
-/*   Updated: 2022/12/18 23:18:22 by abravo           ###   ########.fr       */
+/*   Updated: 2022/12/21 20:45:27 by abravo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,29 @@ int	sum_array(int *arr)
 	return (sum);
 }
 
-int	main()//(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
+	int		fd[2];
+	pid_t	pid1;
+
+	if (!*env)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	if (ac == 5)
+	{
+		if (pipe(fd) == -1)
+			ft_error(NULL);
+		pid1 = fork();
+		if (pid1 == -1)
+			ft_error(NULL);
+		if (pid1 == 0)
+			child_process();
+		else
+			parent_process();
+	}
+	else
+		write(2, "Invalid number of arguments.\n", 29);
 	return (0);
 }

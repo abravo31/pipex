@@ -1,7 +1,8 @@
-#LIBFT_PATH		=	./libft
-#LIBFT			=	$(LIBFT_PATH)/libft.a
+LIBFT_PATH		=	./libft
+LIBFT			=	$(LIBFT_PATH)/libft.a
 
 SOURCES_FILES	=	main.c \
+					parsing.c tools.c
 
 #BONUS_FILES	=	main_bonus.c \
 
@@ -30,7 +31,7 @@ NAME			=	pipex
 CC				=	gcc
 RM				=	rm -f
 
-CFLAGS			=	-g3 #-Wall -Wextra #-Werror #-fsanitize=address
+CFLAGS			=	-g3 -Wall -Wextra -Werror #-fsanitize=address
 MLX_LINUX_FLAGS	=	-L. -lXext -L. -lX11 -lm -lbsd
 
 all:	$(NAME)
@@ -39,15 +40,15 @@ all:	$(NAME)
 	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 
-$(NAME):	$(MLX_LINUX) $(OBJECTS) $(HEADER) #$(LIBFT)
+$(NAME):	$(MLX_LINUX) $(OBJECTS) $(HEADER) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(HEADER)
 	@echo "\033[32m$ ${NAME} compiled !"
 	@echo "----------------------------\033[0m"
 
-#$(LIBFT):
-#	$(MAKE) -C $(LIBFT_PATH)
-#	@echo "\033[32m$ libft compiled !"
-#	@echo "----------------------------\033[0m"
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_PATH)
+	@echo "\033[32m$ libft compiled !"
+	@echo "----------------------------\033[0m"
 
 #bonus:	$(NAME_BONUS)
 
@@ -57,12 +58,12 @@ $(NAME):	$(MLX_LINUX) $(OBJECTS) $(HEADER) #$(LIBFT)
 #	@echo "----------------------------\033[0m"
 
 clean:
-#	@$(MAKE) -C $(LIBFT_PATH) clean
+	@$(MAKE) -C $(LIBFT_PATH) clean
 	@$(RM) $(OBJECTS) $(OBJ_BONUS)
 	@echo "\033[32mClean !\033[0m"
 
 fclean:		clean
-#	@$(MAKE) -C $(LIBFT_PATH) fclean
+	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(RM) $(NAME) #$(NAME_BONUS)
 
 re:			fclean all
