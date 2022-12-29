@@ -31,8 +31,8 @@ NAME			=	pipex
 CC				=	gcc
 RM				=	rm -f
 
-CFLAGS			=	-g3 -Wall -Wextra -Werror #-fsanitize=address
-MLX_LINUX_FLAGS	=	-L. -lXext -L. -lX11 -lm -lbsd
+# CFLAGS			=	-g3 -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS			=
 
 all:	$(NAME)
 
@@ -41,7 +41,7 @@ all:	$(NAME)
 
 
 $(NAME):	$(MLX_LINUX) $(OBJECTS) $(HEADER) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(HEADER)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(HEADER) $(LIBFT)
 	@echo "\033[32m$ ${NAME} compiled !"
 	@echo "----------------------------\033[0m"
 
@@ -59,7 +59,7 @@ $(LIBFT):
 
 clean:
 	@$(MAKE) -C $(LIBFT_PATH) clean
-	@$(RM) $(OBJECTS) $(OBJ_BONUS)
+	@$(RM) $(OBJECTS) #$(OBJ_BONUS)
 	@echo "\033[32mClean !\033[0m"
 
 fclean:		clean
